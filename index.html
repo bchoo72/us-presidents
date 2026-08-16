@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>U.S. Presidents</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: #f2f2f7;
+      color: #111;
+    }
+
+    header {
+      background: #1c3f73;
+      color: white;
+      padding: 28px 20px 22px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      opacity: 0.85;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .search {
+      width: 100%;
+      padding: 15px;
+      font-size: 17px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      margin-bottom: 18px;
+    }
+
+    .president {
+      background: white;
+      border-radius: 14px;
+      padding: 17px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .number {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .name {
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .years {
+      color: #555;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>U.S. Presidents</h1>
+  <p>Presidents of the United States in order</p>
+</header>
+
+<div class="container">
+
+  <input
+    class="search"
+    id="search"
+    type="text"
+    placeholder="Search presidents..."
+    onkeyup="searchPresidents()"
+  >
+
+  <div id="list"></div>
+
+</div>
+
+<script>
+const presidents = [
+  ["George Washington","1789–1797"],
+  ["John Adams","1797–1801"],
+  ["Thomas Jefferson","1801–1809"],
+  ["James Madison","1809–1817"],
+  ["James Monroe","1817–1825"],
+  ["John Quincy Adams","1825–1829"],
+  ["Andrew Jackson","1829–1837"],
+  ["Martin Van Buren","1837–1841"],
+  ["William Henry Harrison","1841"],
+  ["John Tyler","1841–1845"],
+  ["James K. Polk","1845–1849"],
+  ["Zachary Taylor","1849–1850"],
+  ["Millard Fillmore","1850–1853"],
+  ["Franklin Pierce","1853–1857"],
+  ["James Buchanan","1857–1861"],
+  ["Abraham Lincoln","1861–1865"],
+  ["Andrew Johnson","1865–1869"],
+  ["Ulysses S. Grant","1869–1877"],
+  ["Rutherford B. Hayes","1877–1881"],
+  ["James A. Garfield","1881"],
+  ["Chester A. Arthur","1881–1885"],
+  ["Grover Cleveland","1885–1889"],
+  ["Benjamin Harrison","1889–1893"],
+  ["Grover Cleveland","1893–1897"],
+  ["William McKinley","1897–1901"],
+  ["Theodore Roosevelt","1901–1909"],
+  ["William Howard Taft","1909–1913"],
+  ["Woodrow Wilson","1913–1921"],
+  ["Warren G. Harding","1921–1923"],
+  ["Calvin Coolidge","1923–1929"],
+  ["Herbert Hoover","1929–1933"],
+  ["Franklin D. Roosevelt","1933–1945"],
+  ["Harry S. Truman","1945–1953"],
+  ["Dwight D. Eisenhower","1953–1961"],
+  ["John F. Kennedy","1961–1963"],
+  ["Lyndon B. Johnson","1963–1969"],
+  ["Richard Nixon","1969–1974"],
+  ["Gerald Ford","1974–1977"],
+  ["Jimmy Carter","1977–1981"],
+  ["Ronald Reagan","1981–1989"],
+  ["George H. W. Bush","1989–1993"],
+  ["Bill Clinton","1993–2001"],
+  ["George W. Bush","2001–2009"],
+  ["Barack Obama","2009–2017"],
+  ["Donald Trump","2017–2021"],
+  ["Joe Biden","2021–2025"],
+  ["Donald Trump","2025–present"]
+];
+
+function displayPresidents(items) {
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+
+  items.forEach((president) => {
+    const originalNumber = presidents.indexOf(president) + 1;
+
+    list.innerHTML += `
+      <div class="president">
+        <div class="number">President #${originalNumber}</div>
+        <div class="name">${president[0]}</div>
+        <div class="years">${president[1]}</div>
+      </div>
+    `;
+  });
+}
+
+function searchPresidents() {
+  const search = document.getElementById("search").value.toLowerCase();
+
+  const results = presidents.filter(president =>
+    president[0].toLowerCase().includes(search)
+  );
+
+  displayPresidents(results);
+}
+
+displayPresidents(presidents);
+</script>
+
+</body>
+</html>
