@@ -6,101 +6,103 @@
 <title>U.S. Presidents</title>
 
 <style>
-  * {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-  }
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #f4f4f7;
-    min-height: 100vh;
-    user-select: none;
-    -webkit-user-select: none;
-  }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f4f4f7;
+  min-height: 100vh;
+  user-select: none;
+  -webkit-user-select: none;
+}
 
-  .container {
-    width: 100%;
-    min-height: 100vh;
-    padding: 30px 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
-  .main-row {
-    width: 100%;
-    flex: 1;
-    min-height: 65vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+.tap-area {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
 
-  .tap-area {
-    flex: 1;
-    min-height: 65vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    padding: 10px;
-  }
+.number {
+  font-size: 22px;
+  color: #777;
+  margin-bottom: 16px;
+  min-height: 28px;
+}
 
-  .number {
-    font-size: 24px;
-    color: #777;
-    margin-bottom: 15px;
-    min-height: 30px;
-  }
+.name {
+  font-size: 46px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
 
-  .name {
-    font-size: 46px;
-    font-weight: 700;
-    color: #111;
-    margin-bottom: 15px;
-  }
+.years {
+  font-size: 26px;
+  color: #555;
+  min-height: 32px;
+}
 
-  .years {
-    font-size: 28px;
-    color: #555;
-    margin-bottom: 40px;
-    min-height: 34px;
-  }
+.instruction {
+  font-size: 16px;
+  color: #999;
+  margin-top: 35px;
+}
 
-  .instruction {
-    font-size: 18px;
-    color: #999;
-  }
+/* Navigation below the president */
+.navigation {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
 
-  .arrow-button {
-    width: 58px;
-    height: 80px;
-    border: none;
-    border-radius: 14px;
-    background: #333;
-    color: white;
-    font-size: 36px;
-    font-weight: bold;
-    cursor: pointer;
-    flex-shrink: 0;
-  }
+.arrow-button {
+  flex: 1;
+  height: 58px;
+  border: none;
+  border-radius: 14px;
+  background: #333;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-  .reset-button {
-    margin-bottom: 30px;
-    padding: 14px 28px;
-    border: none;
-    border-radius: 12px;
-    font-size: 18px;
-    font-weight: 600;
-    background: #333;
-    color: white;
-    cursor: pointer;
-  }
+.reset-button {
+  width: 100%;
+  max-width: 320px;
+  height: 52px;
+  margin-bottom: 25px;
+  border: none;
+  border-radius: 14px;
+  background: #777;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -108,20 +110,27 @@
 
 <div class="container">
 
-  <div class="main-row">
+  <div class="tap-area" id="tapArea">
+
+    <div class="number" id="number"></div>
+
+    <div class="name" id="name">
+      Press to Begin
+    </div>
+
+    <div class="years" id="years"></div>
+
+    <div class="instruction" id="instruction">
+      Tap anywhere to begin
+    </div>
+
+  </div>
+
+  <div class="navigation">
 
     <button class="arrow-button" id="backButton">
       ←
     </button>
-
-    <div class="tap-area" id="tapArea">
-      <div class="number" id="number"></div>
-      <div class="name" id="name">Press to Begin</div>
-      <div class="years" id="years"></div>
-      <div class="instruction" id="instruction">
-        Tap anywhere to begin
-      </div>
-    </div>
 
     <button class="arrow-button" id="forwardButton">
       →
@@ -136,59 +145,61 @@
 </div>
 
 <script>
+
 const presidents = [
-  ["George Washington","1789–1797"],
-  ["John Adams","1797–1801"],
-  ["Thomas Jefferson","1801–1809"],
-  ["James Madison","1809–1817"],
-  ["James Monroe","1817–1825"],
-  ["John Quincy Adams","1825–1829"],
-  ["Andrew Jackson","1829–1837"],
-  ["Martin Van Buren","1837–1841"],
-  ["William Henry Harrison","1841"],
-  ["John Tyler","1841–1845"],
-  ["James K. Polk","1845–1849"],
-  ["Zachary Taylor","1849–1850"],
-  ["Millard Fillmore","1850–1853"],
-  ["Franklin Pierce","1853–1857"],
-  ["James Buchanan","1857–1861"],
-  ["Abraham Lincoln","1861–1865"],
-  ["Andrew Johnson","1865–1869"],
-  ["Ulysses S. Grant","1869–1877"],
-  ["Rutherford B. Hayes","1877–1881"],
-  ["James A. Garfield","1881"],
-  ["Chester A. Arthur","1881–1885"],
-  ["Grover Cleveland","1885–1889"],
-  ["Benjamin Harrison","1889–1893"],
-  ["Grover Cleveland","1893–1897"],
-  ["William McKinley","1897–1901"],
-  ["Theodore Roosevelt","1901–1909"],
-  ["William Howard Taft","1909–1913"],
-  ["Woodrow Wilson","1913–1921"],
-  ["Warren G. Harding","1921–1923"],
-  ["Calvin Coolidge","1923–1929"],
-  ["Herbert Hoover","1929–1933"],
-  ["Franklin D. Roosevelt","1933–1945"],
-  ["Harry S. Truman","1945–1953"],
-  ["Dwight D. Eisenhower","1953–1961"],
-  ["John F. Kennedy","1961–1963"],
-  ["Lyndon B. Johnson","1963–1969"],
-  ["Richard Nixon","1969–1974"],
-  ["Gerald Ford","1974–1977"],
-  ["Jimmy Carter","1977–1981"],
-  ["Ronald Reagan","1981–1989"],
-  ["George H. W. Bush","1989–1993"],
-  ["Bill Clinton","1993–2001"],
-  ["George W. Bush","2001–2009"],
-  ["Barack Obama","2009–2017"],
-  ["Donald Trump","2017–2021"],
-  ["Joe Biden","2021–2025"],
-  ["Donald Trump","2025–present"]
+["George Washington","1789–1797"],
+["John Adams","1797–1801"],
+["Thomas Jefferson","1801–1809"],
+["James Madison","1809–1817"],
+["James Monroe","1817–1825"],
+["John Quincy Adams","1825–1829"],
+["Andrew Jackson","1829–1837"],
+["Martin Van Buren","1837–1841"],
+["William Henry Harrison","1841"],
+["John Tyler","1841–1845"],
+["James K. Polk","1845–1849"],
+["Zachary Taylor","1849–1850"],
+["Millard Fillmore","1850–1853"],
+["Franklin Pierce","1853–1857"],
+["James Buchanan","1857–1861"],
+["Abraham Lincoln","1861–1865"],
+["Andrew Johnson","1865–1869"],
+["Ulysses S. Grant","1869–1877"],
+["Rutherford B. Hayes","1877–1881"],
+["James A. Garfield","1881"],
+["Chester A. Arthur","1881–1885"],
+["Grover Cleveland","1885–1889"],
+["Benjamin Harrison","1889–1893"],
+["Grover Cleveland","1893–1897"],
+["William McKinley","1897–1901"],
+["Theodore Roosevelt","1901–1909"],
+["William Howard Taft","1909–1913"],
+["Woodrow Wilson","1913–1921"],
+["Warren G. Harding","1921–1923"],
+["Calvin Coolidge","1923–1929"],
+["Herbert Hoover","1929–1933"],
+["Franklin D. Roosevelt","1933–1945"],
+["Harry S. Truman","1945–1953"],
+["Dwight D. Eisenhower","1953–1961"],
+["John F. Kennedy","1961–1963"],
+["Lyndon B. Johnson","1963–1969"],
+["Richard Nixon","1969–1974"],
+["Gerald Ford","1974–1977"],
+["Jimmy Carter","1977–1981"],
+["Ronald Reagan","1981–1989"],
+["George H. W. Bush","1989–1993"],
+["Bill Clinton","1993–2001"],
+["George W. Bush","2001–2009"],
+["Barack Obama","2009–2017"],
+["Donald Trump","2017–2021"],
+["Joe Biden","2021–2025"],
+["Donald Trump","2025–present"]
 ];
 
 let current = -1;
 
 function showPresident() {
+
   document.getElementById("number").textContent =
     "President #" + (current + 1);
 
@@ -199,10 +210,11 @@ function showPresident() {
     presidents[current][1];
 
   document.getElementById("instruction").textContent =
-    "Use the arrows or tap for the next president";
+    "Tap the screen or use the arrows";
 }
 
 function goForward() {
+
   current++;
 
   if (current >= presidents.length) {
@@ -213,6 +225,7 @@ function goForward() {
 }
 
 function goBack() {
+
   if (current <= 0) {
     current = presidents.length - 1;
   } else {
@@ -223,31 +236,36 @@ function goBack() {
 }
 
 function startOver() {
+
   current = -1;
 
   document.getElementById("number").textContent = "";
-  document.getElementById("name").textContent = "Press to Begin";
+
+  document.getElementById("name").textContent =
+    "Press to Begin";
+
   document.getElementById("years").textContent = "";
+
   document.getElementById("instruction").textContent =
     "Tap anywhere to begin";
 }
 
-document.getElementById("tapArea").addEventListener("click", goForward);
+document
+  .getElementById("tapArea")
+  .addEventListener("click", goForward);
 
-document.getElementById("forwardButton").addEventListener("click", function(event) {
-  event.stopPropagation();
-  goForward();
-});
+document
+  .getElementById("forwardButton")
+  .addEventListener("click", goForward);
 
-document.getElementById("backButton").addEventListener("click", function(event) {
-  event.stopPropagation();
-  goBack();
-});
+document
+  .getElementById("backButton")
+  .addEventListener("click", goBack);
 
-document.getElementById("resetButton").addEventListener("click", function(event) {
-  event.stopPropagation();
-  startOver();
-});
+document
+  .getElementById("resetButton")
+  .addEventListener("click", startOver);
+
 </script>
 
 </body>
