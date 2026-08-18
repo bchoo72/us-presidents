@@ -2,19 +2,37 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>U.S. Presidents</title>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-<!-- Custom iPhone Home Screen icon -->
-<link rel="apple-touch-icon" href="icon.png">
+<!-- This makes the fallback icon use P instead of U -->
+<title>Presidents</title>
 
-<!-- Helps it behave more like an app when added to Home Screen -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Presidents">
+<meta
+  name="apple-mobile-web-app-title"
+  content="Presidents"
+>
+
+<meta
+  name="application-name"
+  content="Presidents"
+>
+
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes"
+>
+
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="default"
+>
 
 <style>
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -22,9 +40,17 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
   background: #f4f4f7;
+
   min-height: 100vh;
+
   user-select: none;
   -webkit-user-select: none;
 }
@@ -32,130 +58,219 @@ body {
 .container {
   width: 100%;
   min-height: 100vh;
+
   padding: 30px;
+
   display: flex;
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
+
   text-align: center;
 }
 
 .tap-area {
   width: 100%;
+
   flex: 1;
+
   display: flex;
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
+
   cursor: pointer;
 }
 
 .number {
   font-size: 22px;
+
   color: #777;
+
   margin-bottom: 16px;
+
   min-height: 28px;
 }
 
 .name {
   font-size: 46px;
+
   font-weight: 700;
+
   color: #111;
+
   line-height: 1.15;
+
   margin-bottom: 14px;
 }
 
 .years {
   font-size: 26px;
+
   color: #555;
+
   min-height: 32px;
 }
 
 .instruction {
   font-size: 16px;
+
   color: #999;
+
   margin-top: 35px;
 }
 
-/* Navigation below the president */
+
+/* NAVIGATION */
+
 .navigation {
   width: 100%;
+
   max-width: 320px;
+
   display: flex;
+
   justify-content: space-between;
+
   gap: 20px;
+
   margin-bottom: 22px;
 }
 
 .arrow-button {
   flex: 1;
+
   height: 58px;
+
   border: none;
+
   border-radius: 14px;
+
   background: #333;
+
   color: white;
+
   font-size: 30px;
+
   font-weight: bold;
+
   cursor: pointer;
 }
 
 .reset-button {
   width: 100%;
+
   max-width: 320px;
+
   height: 52px;
+
   margin-bottom: 25px;
+
   border: none;
+
   border-radius: 14px;
+
   background: #777;
+
   color: white;
+
   font-size: 17px;
+
   font-weight: 600;
+
   cursor: pointer;
 }
+
 </style>
 </head>
 
+
 <body>
+
 
 <div class="container">
 
-  <div class="tap-area" id="tapArea">
 
-    <div class="number" id="number"></div>
+  <div
+    class="tap-area"
+    id="tapArea"
+  >
 
-    <div class="name" id="name">
+
+    <div
+      class="number"
+      id="number"
+    ></div>
+
+
+    <div
+      class="name"
+      id="name"
+    >
       Press to Begin
     </div>
 
-    <div class="years" id="years"></div>
 
-    <div class="instruction" id="instruction">
+    <div
+      class="years"
+      id="years"
+    ></div>
+
+
+    <div
+      class="instruction"
+      id="instruction"
+    >
       Tap anywhere to begin
     </div>
 
+
   </div>
+
+
 
   <div class="navigation">
 
-    <button class="arrow-button" id="backButton">
+
+    <button
+      class="arrow-button"
+      id="backButton"
+    >
       ←
     </button>
 
-    <button class="arrow-button" id="forwardButton">
+
+    <button
+      class="arrow-button"
+      id="forwardButton"
+    >
       →
     </button>
 
+
   </div>
 
-  <button class="reset-button" id="resetButton">
+
+
+  <button
+    class="reset-button"
+    id="resetButton"
+  >
     Start Over
   </button>
 
+
 </div>
+
+
 
 <script>
 
+
 const presidents = [
+
 ["George Washington","1789–1797"],
 ["John Adams","1797–1801"],
 ["Thomas Jefferson","1801–1809"],
@@ -203,79 +318,151 @@ const presidents = [
 ["Donald Trump","2017–2021"],
 ["Joe Biden","2021–2025"],
 ["Donald Trump","2025–present"]
+
 ];
+
 
 let current = -1;
 
+
+
 function showPresident() {
 
-  document.getElementById("number").textContent =
-    "President #" + (current + 1);
+  document
+    .getElementById("number")
+    .textContent =
+      "President #" +
+      (current + 1);
 
-  document.getElementById("name").textContent =
-    presidents[current][0];
 
-  document.getElementById("years").textContent =
-    presidents[current][1];
+  document
+    .getElementById("name")
+    .textContent =
+      presidents[current][0];
 
-  document.getElementById("instruction").textContent =
-    "Tap the screen or use the arrows";
+
+  document
+    .getElementById("years")
+    .textContent =
+      presidents[current][1];
+
+
+  document
+    .getElementById("instruction")
+    .textContent =
+      "Tap the screen or use the arrows";
+
 }
+
+
 
 function goForward() {
 
   current++;
 
-  if (current >= presidents.length) {
+
+  if (
+    current >=
+    presidents.length
+  ) {
+
     current = 0;
+
   }
 
+
   showPresident();
+
 }
+
+
 
 function goBack() {
 
   if (current <= 0) {
-    current = presidents.length - 1;
-  } else {
-    current--;
+
+    current =
+      presidents.length - 1;
+
   }
 
+  else {
+
+    current--;
+
+  }
+
+
   showPresident();
+
 }
+
+
 
 function startOver() {
 
   current = -1;
 
-  document.getElementById("number").textContent = "";
 
-  document.getElementById("name").textContent =
-    "Press to Begin";
+  document
+    .getElementById("number")
+    .textContent = "";
 
-  document.getElementById("years").textContent = "";
 
-  document.getElementById("instruction").textContent =
-    "Tap anywhere to begin";
+  document
+    .getElementById("name")
+    .textContent =
+      "Press to Begin";
+
+
+  document
+    .getElementById("years")
+    .textContent = "";
+
+
+  document
+    .getElementById("instruction")
+    .textContent =
+      "Tap anywhere to begin";
+
 }
+
+
 
 document
   .getElementById("tapArea")
-  .addEventListener("click", goForward);
+  .addEventListener(
+    "click",
+    goForward
+  );
+
 
 document
   .getElementById("forwardButton")
-  .addEventListener("click", goForward);
+  .addEventListener(
+    "click",
+    goForward
+  );
+
 
 document
   .getElementById("backButton")
-  .addEventListener("click", goBack);
+  .addEventListener(
+    "click",
+    goBack
+  );
+
 
 document
   .getElementById("resetButton")
-  .addEventListener("click", startOver);
+  .addEventListener(
+    "click",
+    startOver
+  );
+
 
 </script>
+
 
 </body>
 </html>
