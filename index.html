@@ -5,10 +5,9 @@
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1.0"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 >
 
-<!-- This makes the fallback icon use P instead of U -->
 <title>Presidents</title>
 
 <meta
@@ -38,9 +37,16 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html,
 body {
   margin: 0;
+  width: 100%;
+  min-height: 100%;
+  touch-action: manipulation;
+  overscroll-behavior: none;
+}
 
+body {
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -53,6 +59,12 @@ body {
 
   user-select: none;
   -webkit-user-select: none;
+
+  -webkit-text-size-adjust: 100%;
+}
+
+button {
+  touch-action: manipulation;
 }
 
 .container {
@@ -82,6 +94,8 @@ body {
   justify-content: center;
 
   cursor: pointer;
+
+  touch-action: manipulation;
 }
 
 .number {
@@ -128,20 +142,22 @@ body {
 .navigation {
   width: 100%;
 
-  max-width: 320px;
+  max-width: 420px;
 
-  display: flex;
+  display: grid;
 
-  justify-content: space-between;
+  grid-template-columns:
+    1fr
+    1fr
+    1fr
+    1fr;
 
-  gap: 20px;
+  gap: 10px;
 
   margin-bottom: 22px;
 }
 
-.arrow-button {
-  flex: 1;
-
+.nav-button {
   height: 58px;
 
   border: none;
@@ -152,17 +168,21 @@ body {
 
   color: white;
 
-  font-size: 30px;
+  font-size: 24px;
 
   font-weight: bold;
 
   cursor: pointer;
 }
 
+.skip-button {
+  font-size: 18px;
+}
+
 .reset-button {
   width: 100%;
 
-  max-width: 320px;
+  max-width: 420px;
 
   height: 52px;
 
@@ -181,6 +201,8 @@ body {
   font-weight: 600;
 
   cursor: pointer;
+
+  touch-action: manipulation;
 }
 
 </style>
@@ -235,7 +257,15 @@ body {
 
 
     <button
-      class="arrow-button"
+      class="nav-button skip-button"
+      id="backFiveButton"
+    >
+      −5
+    </button>
+
+
+    <button
+      class="nav-button"
       id="backButton"
     >
       ←
@@ -243,10 +273,18 @@ body {
 
 
     <button
-      class="arrow-button"
+      class="nav-button"
       id="forwardButton"
     >
       →
+    </button>
+
+
+    <button
+      class="nav-button skip-button"
+      id="forwardFiveButton"
+    >
+      +5
     </button>
 
 
@@ -350,7 +388,7 @@ function showPresident() {
   document
     .getElementById("instruction")
     .textContent =
-      "Tap the screen or use the arrows";
+      "Tap the screen or use the buttons";
 
 }
 
@@ -389,6 +427,54 @@ function goBack() {
   else {
 
     current--;
+
+  }
+
+
+  showPresident();
+
+}
+
+
+
+function goForwardFive() {
+
+  if (current === -1) {
+
+    current = 4;
+
+  }
+
+  else {
+
+    current =
+      (current + 5) %
+      presidents.length;
+
+  }
+
+
+  showPresident();
+
+}
+
+
+
+function goBackFive() {
+
+  if (current === -1) {
+
+    current =
+      presidents.length - 5;
+
+  }
+
+  else {
+
+    current =
+      (current - 5 +
+      presidents.length) %
+      presidents.length;
 
   }
 
@@ -450,6 +536,22 @@ document
   .addEventListener(
     "click",
     goBack
+  );
+
+
+document
+  .getElementById("forwardFiveButton")
+  .addEventListener(
+    "click",
+    goForwardFive
+  );
+
+
+document
+  .getElementById("backFiveButton")
+  .addEventListener(
+    "click",
+    goBackFive
   );
 
 
