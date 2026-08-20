@@ -68,9 +68,7 @@ button {
 }
 
 
-/* =========================
-   MAIN STUDY PAGE
-========================= */
+/* MAIN PAGE */
 
 .container {
   width: 100%;
@@ -142,9 +140,38 @@ button {
 }
 
 
-/* =========================
-   NAVIGATION
-========================= */
+/* NEW ALL PRESIDENTS BUTTON */
+
+.list-button {
+  margin-top: 22px;
+
+  width: 220px;
+
+  height: 52px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: #1f5fae;
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0
+    4px
+    12px
+    rgba(0,0,0,0.12);
+}
+
+
+/* NAVIGATION */
 
 .navigation {
   width: 100%;
@@ -161,7 +188,7 @@ button {
 
   gap: 10px;
 
-  margin-bottom: 14px;
+  margin-bottom: 22px;
 }
 
 .nav-button {
@@ -186,27 +213,14 @@ button {
   font-size: 18px;
 }
 
-
-/* =========================
-   HOME BUTTONS
-========================= */
-
-.home-buttons {
-  width: 100%;
-  max-width: 420px;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 10px;
-
-  margin-bottom: 25px;
-}
-
 .reset-button {
   width: 100%;
 
+  max-width: 420px;
+
   height: 52px;
+
+  margin-bottom: 25px;
 
   border: none;
 
@@ -221,32 +235,12 @@ button {
   font-weight: 600;
 
   cursor: pointer;
-}
 
-.list-button {
-  width: 100%;
-
-  height: 52px;
-
-  border: none;
-
-  border-radius: 14px;
-
-  background: #1f5fae;
-
-  color: white;
-
-  font-size: 17px;
-
-  font-weight: 600;
-
-  cursor: pointer;
+  touch-action: manipulation;
 }
 
 
-/* =========================
-   PRESIDENT LIST PAGE
-========================= */
+/* PRESIDENT LIST PAGE */
 
 .list-page {
   display: none;
@@ -258,8 +252,8 @@ button {
   background: #f4f4f7;
 
   padding:
-    25px
     20px
+    18px
     50px;
 
   text-align: left;
@@ -280,13 +274,11 @@ button {
   padding:
     10px
     0
-    18px;
-
-  margin-bottom: 10px;
+    16px;
 }
 
 .list-title {
-  font-size: 34px;
+  font-size: 32px;
 
   font-weight: 750;
 
@@ -294,7 +286,7 @@ button {
 
   text-align: center;
 
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .home-button {
@@ -331,15 +323,16 @@ button {
   max-width: 650px;
 
   margin:
-    0
-    auto;
+    15px
+    auto
+    0;
 }
 
 .president-row {
   display: grid;
 
   grid-template-columns:
-    46px
+    48px
     1fr;
 
   gap: 12px;
@@ -347,10 +340,10 @@ button {
   align-items: center;
 
   padding:
-    17px
-    15px;
+    16px
+    14px;
 
-  margin-bottom: 10px;
+  margin-bottom: 9px;
 
   background: white;
 
@@ -392,8 +385,6 @@ button {
 }
 
 
-/* Smaller phones */
-
 @media (max-width: 390px) {
 
   .container {
@@ -409,7 +400,7 @@ button {
   }
 
   .list-title {
-    font-size: 30px;
+    font-size: 29px;
   }
 
 }
@@ -420,10 +411,6 @@ button {
 
 <body>
 
-
-<!-- =========================
-     MAIN PAGE
-========================= -->
 
 <div
   class="container"
@@ -463,6 +450,14 @@ button {
     >
       Tap anywhere to begin
     </div>
+
+
+    <button
+      class="list-button"
+      id="listButton"
+    >
+      All Presidents
+    </button>
 
 
   </div>
@@ -508,35 +503,17 @@ button {
 
 
 
-  <div class="home-buttons">
-
-
-    <button
-      class="list-button"
-      id="listButton"
-    >
-      All Presidents
-    </button>
-
-
-    <button
-      class="reset-button"
-      id="resetButton"
-    >
-      Start Over
-    </button>
-
-
-  </div>
+  <button
+    class="reset-button"
+    id="resetButton"
+  >
+    Start Over
+  </button>
 
 
 </div>
 
 
-
-<!-- =========================
-     ALL PRESIDENTS PAGE
-========================= -->
 
 <div
   class="list-page"
@@ -633,10 +610,6 @@ let current = -1;
 
 
 
-/* =========================
-   SHOW PRESIDENT
-========================= */
-
 function showPresident() {
 
   document
@@ -666,10 +639,6 @@ function showPresident() {
 }
 
 
-
-/* =========================
-   NAVIGATION
-========================= */
 
 function goForward() {
 
@@ -762,10 +731,6 @@ function goBackFive() {
 
 
 
-/* =========================
-   START OVER
-========================= */
-
 function startOver() {
 
   current = -1;
@@ -795,10 +760,6 @@ function startOver() {
 }
 
 
-
-/* =========================
-   BUILD PRESIDENT LIST
-========================= */
 
 function buildPresidentList() {
 
@@ -861,11 +822,9 @@ function buildPresidentList() {
 
 
 
-/* =========================
-   OPEN LIST
-========================= */
+function openList(event) {
 
-function openList() {
+  event.stopPropagation();
 
   buildPresidentList();
 
@@ -891,10 +850,6 @@ function openList() {
 
 
 
-/* =========================
-   RETURN HOME
-========================= */
-
 function goHome() {
 
   document
@@ -917,10 +872,6 @@ function goHome() {
 }
 
 
-
-/* =========================
-   EVENT LISTENERS
-========================= */
 
 document
   .getElementById("tapArea")
