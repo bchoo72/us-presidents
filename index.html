@@ -67,6 +67,11 @@ button {
   touch-action: manipulation;
 }
 
+
+/* =========================
+   MAIN STUDY PAGE
+========================= */
+
 .container {
   width: 100%;
   min-height: 100vh;
@@ -137,7 +142,9 @@ button {
 }
 
 
-/* NAVIGATION */
+/* =========================
+   NAVIGATION
+========================= */
 
 .navigation {
   width: 100%;
@@ -154,7 +161,7 @@ button {
 
   gap: 10px;
 
-  margin-bottom: 22px;
+  margin-bottom: 14px;
 }
 
 .nav-button {
@@ -179,14 +186,27 @@ button {
   font-size: 18px;
 }
 
+
+/* =========================
+   HOME BUTTONS
+========================= */
+
+.home-buttons {
+  width: 100%;
+  max-width: 420px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-bottom: 25px;
+}
+
 .reset-button {
   width: 100%;
 
-  max-width: 420px;
-
   height: 52px;
-
-  margin-bottom: 25px;
 
   border: none;
 
@@ -201,8 +221,197 @@ button {
   font-weight: 600;
 
   cursor: pointer;
+}
 
-  touch-action: manipulation;
+.list-button {
+  width: 100%;
+
+  height: 52px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: #1f5fae;
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   PRESIDENT LIST PAGE
+========================= */
+
+.list-page {
+  display: none;
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  background: #f4f4f7;
+
+  padding:
+    25px
+    20px
+    50px;
+
+  text-align: left;
+}
+
+.list-header {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 10;
+
+  background: rgba(244,244,247,0.96);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  padding:
+    10px
+    0
+    18px;
+
+  margin-bottom: 10px;
+}
+
+.list-title {
+  font-size: 34px;
+
+  font-weight: 750;
+
+  color: #111;
+
+  text-align: center;
+
+  margin-bottom: 16px;
+}
+
+.home-button {
+  width: 100%;
+
+  max-width: 420px;
+
+  height: 50px;
+
+  display: block;
+
+  margin:
+    0
+    auto;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: #333;
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.president-list {
+  width: 100%;
+
+  max-width: 650px;
+
+  margin:
+    0
+    auto;
+}
+
+.president-row {
+  display: grid;
+
+  grid-template-columns:
+    46px
+    1fr;
+
+  gap: 12px;
+
+  align-items: center;
+
+  padding:
+    17px
+    15px;
+
+  margin-bottom: 10px;
+
+  background: white;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0
+    2px
+    8px
+    rgba(0,0,0,0.05);
+}
+
+.president-row-number {
+  font-size: 17px;
+
+  font-weight: 700;
+
+  color: #1f5fae;
+
+  text-align: center;
+}
+
+.president-row-name {
+  font-size: 19px;
+
+  font-weight: 650;
+
+  color: #111;
+
+  line-height: 1.25;
+}
+
+.president-row-years {
+  font-size: 15px;
+
+  color: #777;
+
+  margin-top: 3px;
+}
+
+
+/* Smaller phones */
+
+@media (max-width: 390px) {
+
+  .container {
+    padding: 22px;
+  }
+
+  .name {
+    font-size: 40px;
+  }
+
+  .years {
+    font-size: 23px;
+  }
+
+  .list-title {
+    font-size: 30px;
+  }
+
 }
 
 </style>
@@ -212,7 +421,14 @@ button {
 <body>
 
 
-<div class="container">
+<!-- =========================
+     MAIN PAGE
+========================= -->
+
+<div
+  class="container"
+  id="mainPage"
+>
 
 
   <div
@@ -292,12 +508,65 @@ button {
 
 
 
-  <button
-    class="reset-button"
-    id="resetButton"
-  >
-    Start Over
-  </button>
+  <div class="home-buttons">
+
+
+    <button
+      class="list-button"
+      id="listButton"
+    >
+      All Presidents
+    </button>
+
+
+    <button
+      class="reset-button"
+      id="resetButton"
+    >
+      Start Over
+    </button>
+
+
+  </div>
+
+
+</div>
+
+
+
+<!-- =========================
+     ALL PRESIDENTS PAGE
+========================= -->
+
+<div
+  class="list-page"
+  id="listPage"
+>
+
+
+  <div class="list-header">
+
+
+    <div class="list-title">
+      U.S. Presidents
+    </div>
+
+
+    <button
+      class="home-button"
+      id="homeButton"
+    >
+      ← Home
+    </button>
+
+
+  </div>
+
+
+  <div
+    class="president-list"
+    id="presidentList"
+  ></div>
 
 
 </div>
@@ -364,6 +633,10 @@ let current = -1;
 
 
 
+/* =========================
+   SHOW PRESIDENT
+========================= */
+
 function showPresident() {
 
   document
@@ -393,6 +666,10 @@ function showPresident() {
 }
 
 
+
+/* =========================
+   NAVIGATION
+========================= */
 
 function goForward() {
 
@@ -485,6 +762,10 @@ function goBackFive() {
 
 
 
+/* =========================
+   START OVER
+========================= */
+
 function startOver() {
 
   current = -1;
@@ -514,6 +795,132 @@ function startOver() {
 }
 
 
+
+/* =========================
+   BUILD PRESIDENT LIST
+========================= */
+
+function buildPresidentList() {
+
+  const list =
+    document.getElementById(
+      "presidentList"
+    );
+
+
+  list.innerHTML = "";
+
+
+  presidents.forEach(
+    (president, index) => {
+
+
+      const row =
+        document.createElement(
+          "div"
+        );
+
+
+      row.className =
+        "president-row";
+
+
+      row.innerHTML = `
+
+        <div
+          class="president-row-number"
+        >
+          ${index + 1}
+        </div>
+
+        <div>
+
+          <div
+            class="president-row-name"
+          >
+            ${president[0]}
+          </div>
+
+          <div
+            class="president-row-years"
+          >
+            ${president[1]}
+          </div>
+
+        </div>
+
+      `;
+
+
+      list.appendChild(row);
+
+    }
+  );
+
+}
+
+
+
+/* =========================
+   OPEN LIST
+========================= */
+
+function openList() {
+
+  buildPresidentList();
+
+
+  document
+    .getElementById("mainPage")
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById("listPage")
+    .style.display =
+      "block";
+
+
+  window.scrollTo(
+    0,
+    0
+  );
+
+}
+
+
+
+/* =========================
+   RETURN HOME
+========================= */
+
+function goHome() {
+
+  document
+    .getElementById("listPage")
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById("mainPage")
+    .style.display =
+      "flex";
+
+
+  window.scrollTo(
+    0,
+    0
+  );
+
+}
+
+
+
+/* =========================
+   EVENT LISTENERS
+========================= */
 
 document
   .getElementById("tapArea")
@@ -560,6 +967,22 @@ document
   .addEventListener(
     "click",
     startOver
+  );
+
+
+document
+  .getElementById("listButton")
+  .addEventListener(
+    "click",
+    openList
+  );
+
+
+document
+  .getElementById("homeButton")
+  .addEventListener(
+    "click",
+    goHome
   );
 
 
